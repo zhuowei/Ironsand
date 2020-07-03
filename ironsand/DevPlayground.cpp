@@ -29,15 +29,17 @@
 *********************************************************************************************************************************/
 #define LOG_GROUP LOG_GROUP_MISC
 #include <VBox/vmm/pdmdev.h>
-#include <VBox/version.h>
+// #include <VBox/version.h>
 #include <VBox/err.h>
 #include <VBox/log.h>
 
+#if 0
 #include <VBox/com/assert.h>
 #include <VBox/com/defs.h>
 #include <VBox/com/string.h>
 #include <VBox/com/Guid.h>
 #include <VBox/com/VirtualBox.h>
+#endif
 
 #include <iprt/assert.h>
 
@@ -415,12 +417,14 @@ extern "C" DECLEXPORT(int) VBoxDevicesRegister(PPDMDEVREGCB pCallbacks, uint32_t
 {
     LogFlow(("VBoxPlaygroundDevice::VBoxDevicesRegister: u32Version=%#x pCallbacks->u32Version=%#x\n", u32Version, pCallbacks->u32Version));
 
+#if 0
     AssertLogRelMsgReturn(u32Version >= VBOX_VERSION,
                           ("VirtualBox version %#x, expected %#x or higher\n", u32Version, VBOX_VERSION),
                           VERR_VERSION_MISMATCH);
     AssertLogRelMsgReturn(pCallbacks->u32Version == PDM_DEVREG_CB_VERSION,
                           ("callback version %#x, expected %#x\n", pCallbacks->u32Version, PDM_DEVREG_CB_VERSION),
                           VERR_VERSION_MISMATCH);
+#endif
 
     return pCallbacks->pfnRegister(pCallbacks, &g_DevicePlayground);
 }
